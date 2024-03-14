@@ -1,6 +1,7 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
+    background-color: #dde655;
   }
   
   textarea {
@@ -49,7 +50,7 @@ body {
     border-left: 1px solid black;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #06aed5;
+    background-color: #075e1e;
     color: white;
   }
   
