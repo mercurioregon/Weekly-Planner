@@ -1,31 +1,45 @@
-// $(function (){
+$(document).ready(function (){
+$("#currentDay").text(dayjs().format("MMMM, DD, YYYY"))
+// Add a listener for click events on the save button.
 
-const saveButton = document.querySelector("hour-9")
 
-textContent = userInfo
-addEventListener("click", function(){
-    localStorage.setItem("hour-9",userInfo )
+for (let i = 1; i <= 24; i++){
+  let hour = dayjs().hour(i)
+  let timeblock = $("<div>").attr("id",`hour-${i}`).addClass("row time-block ")
+  let timetext = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(hour.format("hA"))
+  let textarea =$("<textarea>").attr("rows", 3 ).addClass("col-8 col-md-10 description")
+  if (hour.isBefore(dayjs(),"hour")){
+    timeblock.addClass("past")}
+  else if (hour.isSame(dayjs(), "hour")){
+    timeblock.addClass("present")
 
+  } else {
+    timeblock.addClass("future")
+  }
+  let savedData = localStorage.getItem(`userInfo${i}`)
+  if (savedData){
+    textarea.val(savedData)
+
+
+  }
+
+    let saveButton = $("<button>").attr("aria-label", "save" ).addClass("btn saveBtn col-2 col-md-1").html(`<i class="fas fa-save" aria-hidden="true"></i>`)
+    saveButton.click( function(){
+      let usertext = textarea.val()
+      localStorage.setItem(`userInfo${i}`, usertext);
+    })
+    
+
+    timeblock.append(timetext,textarea,saveButton)
+  $(".container-lg").append(timeblock)
 }
+})
 
 
 
 
-
-
-
-
-
-
- // TODO: Add a listener for click events on the save button.
   
-//  This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage.
-  
-  
-  
-  
+   
 //   HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
